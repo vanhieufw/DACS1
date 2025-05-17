@@ -56,21 +56,27 @@ public class AdminFrame extends JFrame {
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
         sidebar.setBackground(new Color(40, 40, 40));
 
+        JButton homeButton = new JButton("Trang chủ");
         JButton infoButton = new JButton("Thông tin phim");
-        JButton scheduleButton = new JButton("Lịch chiếu");
-        JButton ticketsButton = new JButton("Vé đã đặt");
+        JButton roomButton = new JButton("Phòng chiếu");
+        JButton staffButton = new JButton("Nhân viên");
+        JButton customerButton = new JButton("Khách hàng");
         JButton statsButton = new JButton("Thống kê");
         JButton logoutButton = new JButton("Đăng xuất");
 
+        styleButton(homeButton);
         styleButton(infoButton);
-        styleButton(scheduleButton);
-        styleButton(ticketsButton);
+        styleButton(roomButton);
+        styleButton(staffButton);
+        styleButton(customerButton);
         styleButton(statsButton);
         styleButton(logoutButton);
 
+        homeButton.addActionListener(e -> showPanel("Trang chủ"));
         infoButton.addActionListener(e -> showPanel("Thông tin phim"));
-        scheduleButton.addActionListener(e -> showPanel("Lịch chiếu"));
-        ticketsButton.addActionListener(e -> showPanel("Vé đã đặt"));
+        roomButton.addActionListener(e -> showPanel("Phòng chiếu"));
+        staffButton.addActionListener(e -> showPanel("Nhân viên"));
+        customerButton.addActionListener(e -> showPanel("Khách hàng"));
         statsButton.addActionListener(e -> showPanel("Thống kê"));
         logoutButton.addActionListener(e -> {
             dispose();
@@ -78,11 +84,15 @@ public class AdminFrame extends JFrame {
         });
 
         sidebar.add(Box.createVerticalStrut(30));
+        sidebar.add(homeButton);
+        sidebar.add(Box.createVerticalStrut(15));
         sidebar.add(infoButton);
         sidebar.add(Box.createVerticalStrut(15));
-        sidebar.add(scheduleButton);
+        sidebar.add(roomButton);
         sidebar.add(Box.createVerticalStrut(15));
-        sidebar.add(ticketsButton);
+        sidebar.add(staffButton);
+        sidebar.add(Box.createVerticalStrut(15));
+        sidebar.add(customerButton);
         sidebar.add(Box.createVerticalStrut(15));
         sidebar.add(statsButton);
         sidebar.add(Box.createVerticalStrut(15));
@@ -90,9 +100,11 @@ public class AdminFrame extends JFrame {
 
         // Content area
         contentPanel = new JPanel(new CardLayout());
+        contentPanel.add(createHomePanel(), "Trang chủ");
         contentPanel.add(createInfoPanel(), "Thông tin phim");
-        contentPanel.add(createSchedulePanel(), "Lịch chiếu");
-        contentPanel.add(createTicketsPanel(), "Vé đã đặt");
+        contentPanel.add(createRoomPanel(), "Phòng chiếu");
+        contentPanel.add(createStaffPanel(), "Nhân viên");
+        contentPanel.add(createCustomerPanel(), "Khách hàng");
         contentPanel.add(createStatsPanel(), "Thống kê");
 
         mainView.add(sidebar, BorderLayout.WEST);
@@ -192,7 +204,6 @@ public class AdminFrame extends JFrame {
             }
         };
         movieTable = new JTable(tableModel);
-        // Enforce single selection to ensure only one movie can be selected
         movieTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         movieTable.setRowHeight(100);
         movieTable.getColumnModel().getColumn(3).setPreferredWidth(100);
@@ -401,7 +412,8 @@ public class AdminFrame extends JFrame {
         if (selectedRow != -1) {
             titleField.setText((String) tableModel.getValueAt(selectedRow, 1));
             descriptionArea.setText((String) tableModel.getValueAt(selectedRow, 2));
-            String poster = (String) tableModel.getValueAt(selectedRow, 3);
+            Object posterObj = tableModel.getValueAt(selectedRow, 3);
+            String poster = posterObj instanceof String ? (String) posterObj : "";
             posterField.setText(poster);
             posterPreview.setIcon(poster.isEmpty() ? null : new ImageIcon(new ImageIcon(poster).getImage().getScaledInstance(150, 200, Image.SCALE_SMOOTH)));
         }
@@ -437,27 +449,51 @@ public class AdminFrame extends JFrame {
         deleteButton.setEnabled(false);
     }
 
-    private JPanel createSchedulePanel() {
+    private JPanel createHomePanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(245, 245, 245));
-        panel.add(new JLabel("Lịch chiếu", SwingConstants.CENTER), BorderLayout.NORTH);
-        JTextArea scheduleText = new JTextArea("Lịch chiếu:\n- Phim A: 14:00, Phòng 1\n- Phim B: 16:00, Phòng 2\n- Phim C: 18:00, Phòng 1");
-        scheduleText.setEditable(false);
-        scheduleText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        scheduleText.setBackground(new Color(255, 255, 255));
-        panel.add(new JScrollPane(scheduleText), BorderLayout.CENTER);
+        panel.add(new JLabel("Trang chủ", SwingConstants.CENTER), BorderLayout.NORTH);
+        JTextArea homeText = new JTextArea("Chào mừng đến với hệ thống quản lý bán vé xem phim!");
+        homeText.setEditable(false);
+        homeText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        homeText.setBackground(new Color(255, 255, 255));
+        panel.add(new JScrollPane(homeText), BorderLayout.CENTER);
         return panel;
     }
 
-    private JPanel createTicketsPanel() {
+    private JPanel createRoomPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(245, 245, 245));
-        panel.add(new JLabel("Vé đã đặt", SwingConstants.CENTER), BorderLayout.NORTH);
-        JTextArea ticketsText = new JTextArea("Vé đã đặt:\n- Khách hàng 1: Phim A, Ghế A1\n- Khách hàng 2: Phim B, Ghế B2");
-        ticketsText.setEditable(false);
-        ticketsText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        ticketsText.setBackground(new Color(255, 255, 255));
-        panel.add(new JScrollPane(ticketsText), BorderLayout.CENTER);
+        panel.add(new JLabel("Phòng chiếu", SwingConstants.CENTER), BorderLayout.NORTH);
+        JTextArea roomText = new JTextArea("Danh sách phòng chiếu:\n- Phòng 1: 100 ghế\n- Phòng 2: 80 ghế");
+        roomText.setEditable(false);
+        roomText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        roomText.setBackground(new Color(255, 255, 255));
+        panel.add(new JScrollPane(roomText), BorderLayout.CENTER);
+        return panel;
+    }
+
+    private JPanel createStaffPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(new Color(245, 245, 245));
+        panel.add(new JLabel("Nhân viên", SwingConstants.CENTER), BorderLayout.NORTH);
+        JTextArea staffText = new JTextArea("Danh sách nhân viên:\n- Nhân viên 1: Quản lý\n- Nhân viên 2: Bán vé");
+        staffText.setEditable(false);
+        staffText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        staffText.setBackground(new Color(255, 255, 255));
+        panel.add(new JScrollPane(staffText), BorderLayout.CENTER);
+        return panel;
+    }
+
+    private JPanel createCustomerPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(new Color(245, 245, 245));
+        panel.add(new JLabel("Khách hàng", SwingConstants.CENTER), BorderLayout.NORTH);
+        JTextArea customerText = new JTextArea("Danh sách khách hàng:\n- Khách hàng 1: VIP\n- Khách hàng 2: Thường");
+        customerText.setEditable(false);
+        customerText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        customerText.setBackground(new Color(255, 255, 255));
+        panel.add(new JScrollPane(customerText), BorderLayout.CENTER);
         return panel;
     }
 
