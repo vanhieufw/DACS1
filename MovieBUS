@@ -3,7 +3,6 @@ package com.movie.bus;
 import com.movie.dao.MovieDAO;
 import com.movie.model.Movie;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +12,9 @@ public class MovieBUS {
     public void addMovie(Movie movie) throws SQLException {
         if (movie.getTitle() == null || movie.getTitle().trim().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty");
+        }
+        if (movie.getAgeRestriction() < 0) {
+            throw new IllegalArgumentException("Age restriction cannot be negative");
         }
         movieDAO.addMovie(movie);
     }
@@ -34,6 +36,9 @@ public class MovieBUS {
         }
         if (movie.getTitle() == null || movie.getTitle().trim().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty");
+        }
+        if (movie.getAgeRestriction() < 0) {
+            throw new IllegalArgumentException("Age restriction cannot be negative");
         }
         movieDAO.updateMovie(movie);
     }
