@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MovieDAO {
     public void addMovie(Movie movie) throws SQLException {
-        String query = "INSERT INTO Movie (Title, Description, Duration, Director, GenreID, Poster, StartDate, EndDate, ProductionYear, CountryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Movie (Title, Description, Duration, Director, GenreID, Poster, StartDate, EndDate, ProductionYear, CountryID, AgeRestriction) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, movie.getTitle());
@@ -22,6 +22,7 @@ public class MovieDAO {
             stmt.setDate(8, movie.getEndDate());
             stmt.setInt(9, movie.getProductionYear());
             stmt.setInt(10, movie.getCountryID());
+            stmt.setInt(11, movie.getAgeRestriction());
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -56,6 +57,7 @@ public class MovieDAO {
                 movie.setProductionYear(rs.getInt("ProductionYear"));
                 movie.setCountryID(rs.getInt("CountryID"));
                 movie.setCountryName(rs.getString("CountryName"));
+                movie.setAgeRestriction(rs.getInt("AgeRestriction"));
                 movies.add(movie);
             }
         } catch (SQLException e) {
@@ -88,6 +90,7 @@ public class MovieDAO {
                     movie.setProductionYear(rs.getInt("ProductionYear"));
                     movie.setCountryID(rs.getInt("CountryID"));
                     movie.setCountryName(rs.getString("CountryName"));
+                    movie.setAgeRestriction(rs.getInt("AgeRestriction"));
                     return movie;
                 }
             }
@@ -98,7 +101,7 @@ public class MovieDAO {
     }
 
     public void updateMovie(Movie movie) throws SQLException {
-        String query = "UPDATE Movie SET Title = ?, Description = ?, Duration = ?, Director = ?, GenreID = ?, Poster = ?, StartDate = ?, EndDate = ?, ProductionYear = ?, CountryID = ? WHERE MovieID = ?";
+        String query = "UPDATE Movie SET Title = ?, Description = ?, Duration = ?, Director = ?, GenreID = ?, Poster = ?, StartDate = ?, EndDate = ?, ProductionYear = ?, CountryID = ?, AgeRestriction = ? WHERE MovieID = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, movie.getTitle());
@@ -111,7 +114,8 @@ public class MovieDAO {
             stmt.setDate(8, movie.getEndDate());
             stmt.setInt(9, movie.getProductionYear());
             stmt.setInt(10, movie.getCountryID());
-            stmt.setInt(11, movie.getMovieID());
+            stmt.setInt(11, movie.getAgeRestriction());
+            stmt.setInt(12, movie.getMovieID());
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 throw new SQLException("No movie found with ID " + movie.getMovieID());
