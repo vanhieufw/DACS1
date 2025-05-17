@@ -32,6 +32,7 @@ public class AdminFrame extends JFrame {
     private JTextField endDateField;
     private JTextField productionYearField;
     private JTextField countryField;
+    private JTextField ageRestrictionField;
     private JButton updateButton;
     private JButton deleteButton;
     private JPanel formPanel;
@@ -174,14 +175,14 @@ public class AdminFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        formPanel.add(new JLabel("Title:"), gbc);
+        formPanel.add(new JLabel("Tên phim:"), gbc);
         titleField = new JTextField(20);
         titleField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 0; gbc.gridwidth = 2;
         formPanel.add(titleField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 1;
-        formPanel.add(new JLabel("Description:"), gbc);
+        formPanel.add(new JLabel("Mô tả:"), gbc);
         descriptionArea = new JTextArea(3, 20);
         descriptionArea.setLineWrap(true);
         descriptionArea.setEditable(false);
@@ -189,85 +190,92 @@ public class AdminFrame extends JFrame {
         formPanel.add(new JScrollPane(descriptionArea), gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 2;
-        formPanel.add(new JLabel("Duration (minutes):"), gbc);
+        formPanel.add(new JLabel("Thời lượng (phút):"), gbc);
         durationField = new JTextField(20);
         durationField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 2; gbc.gridwidth = 2;
         formPanel.add(durationField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 3;
-        formPanel.add(new JLabel("Director:"), gbc);
+        formPanel.add(new JLabel("Đạo diễn:"), gbc);
         directorField = new JTextField(20);
         directorField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 3; gbc.gridwidth = 2;
         formPanel.add(directorField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 4;
-        formPanel.add(new JLabel("Genre:"), gbc);
+        formPanel.add(new JLabel("Thể loại:"), gbc);
         genreField = new JTextField(20);
         genreField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 4;
         formPanel.add(genreField, gbc);
-        JButton selectGenreButton = new JButton("Select Genre");
+        JButton selectGenreButton = new JButton("Chọn thể loại");
         selectGenreButton.setEnabled(false);
         gbc.gridx = 2; gbc.gridy = 4;
         formPanel.add(selectGenreButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 5;
-        formPanel.add(new JLabel("Poster:"), gbc);
+        formPanel.add(new JLabel("Áp phích:"), gbc);
         posterField = new JTextField(20);
         posterField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 5;
         formPanel.add(posterField, gbc);
-        JButton choosePosterButton = new JButton("Choose Image");
+        JButton choosePosterButton = new JButton("Chọn hình ảnh");
         choosePosterButton.setEnabled(false);
         gbc.gridx = 2; gbc.gridy = 5;
         formPanel.add(choosePosterButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 6;
-        formPanel.add(new JLabel("Start Date (yyyy-MM-dd):"), gbc);
+        formPanel.add(new JLabel("Ngày bắt đầu (yyyy-MM-dd):"), gbc);
         startDateField = new JTextField(20);
         startDateField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 6;
         formPanel.add(startDateField, gbc);
-        JButton selectStartDateButton = new JButton("Select Date");
+        JButton selectStartDateButton = new JButton("Chọn ngày");
         selectStartDateButton.setEnabled(false);
         gbc.gridx = 2; gbc.gridy = 6;
         formPanel.add(selectStartDateButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 7;
-        formPanel.add(new JLabel("End Date (yyyy-MM-dd):"), gbc);
+        formPanel.add(new JLabel("Ngày kết thúc (yyyy-MM-dd):"), gbc);
         endDateField = new JTextField(20);
         endDateField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 7;
         formPanel.add(endDateField, gbc);
-        JButton selectEndDateButton = new JButton("Select Date");
+        JButton selectEndDateButton = new JButton("Chọn ngày");
         selectEndDateButton.setEnabled(false);
         gbc.gridx = 2; gbc.gridy = 7;
         formPanel.add(selectEndDateButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 8;
-        formPanel.add(new JLabel("Production Year:"), gbc);
+        formPanel.add(new JLabel("Năm sản xuất:"), gbc);
         productionYearField = new JTextField(20);
         productionYearField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 8; gbc.gridwidth = 2;
         formPanel.add(productionYearField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 9;
-        formPanel.add(new JLabel("Country:"), gbc);
+        formPanel.add(new JLabel("Quốc gia:"), gbc);
         countryField = new JTextField(20);
         countryField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 9;
         formPanel.add(countryField, gbc);
-        JButton selectCountryButton = new JButton("Select Country");
+        JButton selectCountryButton = new JButton("Chọn quốc gia");
         selectCountryButton.setEnabled(false);
         gbc.gridx = 2; gbc.gridy = 9;
         formPanel.add(selectCountryButton, gbc);
 
+        gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 10;
+        formPanel.add(new JLabel("Giới hạn tuổi:"), gbc);
+        ageRestrictionField = new JTextField(20);
+        ageRestrictionField.setEditable(false);
+        gbc.gridx = 1; gbc.gridy = 10; gbc.gridwidth = 2;
+        formPanel.add(ageRestrictionField, gbc);
+
         posterPreview = new JLabel();
         posterPreview.setPreferredSize(new Dimension(150, 200));
         posterPreview.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        gbc.gridx = 3; gbc.gridy = 0; gbc.gridheight = 10; gbc.gridwidth = 1;
+        gbc.gridx = 3; gbc.gridy = 0; gbc.gridheight = 11; gbc.gridwidth = 1;
         formPanel.add(posterPreview, gbc);
 
         formPanel.setVisible(false);
@@ -317,13 +325,13 @@ public class AdminFrame extends JFrame {
         try {
             List<String> genres = movieBUS.getAllGenres();
             String selectedGenre = (String) JOptionPane.showInputDialog(
-                    this, "Select Genre:", "Genre Selection",
+                    this, "Chọn thể loại:", "Lựa chọn thể loại",
                     JOptionPane.PLAIN_MESSAGE, null, genres.toArray(), genres.get(0));
             if (selectedGenre != null) {
                 genreField.setText(selectedGenre);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to load genres: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Không thể tải danh sách thể loại: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -331,18 +339,18 @@ public class AdminFrame extends JFrame {
         try {
             List<String> countries = movieBUS.getAllCountries();
             String selectedCountry = (String) JOptionPane.showInputDialog(
-                    this, "Select Country:", "Country Selection",
+                    this, "Chọn quốc gia:", "Lựa chọn quốc gia",
                     JOptionPane.PLAIN_MESSAGE, null, countries.toArray(), countries.get(0));
             if (selectedCountry != null) {
                 countryField.setText(selectedCountry);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to load countries: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Không thể tải danh sách quốc gia: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void selectDate(JTextField dateField) {
-        JDialog dateDialog = new JDialog(this, "Select Date", true);
+        JDialog dateDialog = new JDialog(this, "Chọn ngày", true);
         dateDialog.setSize(300, 150);
         dateDialog.setLocationRelativeTo(this);
         dateDialog.setLayout(new BorderLayout());
@@ -354,7 +362,7 @@ public class AdminFrame extends JFrame {
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton okButton = new JButton("OK");
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Hủy");
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
         dateDialog.add(buttonPanel, BorderLayout.SOUTH);
@@ -371,7 +379,7 @@ public class AdminFrame extends JFrame {
 
     private void showAddMovieDialog() {
         JDialog dialog = new JDialog(this, "Thêm phim", true);
-        dialog.setSize(600, 600);
+        dialog.setSize(600, 650);
         dialog.setLocationRelativeTo(this);
         dialog.setLayout(new BorderLayout(10, 10));
         dialog.setBackground(new Color(245, 245, 245));
@@ -382,90 +390,96 @@ public class AdminFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        inputPanel.add(new JLabel("Title:"), gbc);
+        inputPanel.add(new JLabel("Tên phim:"), gbc);
         JTextField tempTitleField = new JTextField(20);
         gbc.gridx = 1; gbc.gridy = 0; gbc.gridwidth = 2;
         inputPanel.add(tempTitleField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 1;
-        inputPanel.add(new JLabel("Description:"), gbc);
+        inputPanel.add(new JLabel("Mô tả:"), gbc);
         JTextArea tempDescriptionArea = new JTextArea(3, 20);
         tempDescriptionArea.setLineWrap(true);
         gbc.gridx = 1; gbc.gridy = 1; gbc.gridwidth = 2;
         inputPanel.add(new JScrollPane(tempDescriptionArea), gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 2;
-        inputPanel.add(new JLabel("Duration (minutes):"), gbc);
+        inputPanel.add(new JLabel("Thời lượng (phút):"), gbc);
         JTextField tempDurationField = new JTextField(20);
         gbc.gridx = 1; gbc.gridy = 2; gbc.gridwidth = 2;
         inputPanel.add(tempDurationField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 3;
-        inputPanel.add(new JLabel("Director:"), gbc);
+        inputPanel.add(new JLabel("Đạo diễn:"), gbc);
         JTextField tempDirectorField = new JTextField(20);
         gbc.gridx = 1; gbc.gridy = 3; gbc.gridwidth = 2;
         inputPanel.add(tempDirectorField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 4;
-        inputPanel.add(new JLabel("Genre:"), gbc);
+        inputPanel.add(new JLabel("Thể loại:"), gbc);
         JTextField tempGenreField = new JTextField(20);
         tempGenreField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 4;
         inputPanel.add(tempGenreField, gbc);
-        JButton tempSelectGenreButton = new JButton("Select Genre");
+        JButton tempSelectGenreButton = new JButton("Chọn thể loại");
         gbc.gridx = 2; gbc.gridy = 4;
         inputPanel.add(tempSelectGenreButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 5;
-        inputPanel.add(new JLabel("Poster:"), gbc);
+        inputPanel.add(new JLabel("Áp phích:"), gbc);
         JTextField tempPosterField = new JTextField(20);
         tempPosterField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 5;
         inputPanel.add(tempPosterField, gbc);
-        JButton tempChoosePosterButton = new JButton("Choose Image");
+        JButton tempChoosePosterButton = new JButton("Chọn hình ảnh");
         gbc.gridx = 2; gbc.gridy = 5;
         inputPanel.add(tempChoosePosterButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 6;
-        inputPanel.add(new JLabel("Start Date (yyyy-MM-dd):"), gbc);
+        inputPanel.add(new JLabel("Ngày bắt đầu (yyyy-MM-dd):"), gbc);
         JTextField tempStartDateField = new JTextField(20);
         tempStartDateField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 6;
         inputPanel.add(tempStartDateField, gbc);
-        JButton tempSelectStartDateButton = new JButton("Select Date");
+        JButton tempSelectStartDateButton = new JButton("Chọn ngày");
         gbc.gridx = 2; gbc.gridy = 6;
         inputPanel.add(tempSelectStartDateButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 7;
-        inputPanel.add(new JLabel("End Date (yyyy-MM-dd):"), gbc);
+        inputPanel.add(new JLabel("Ngày kết thúc (yyyy-MM-dd):"), gbc);
         JTextField tempEndDateField = new JTextField(20);
         tempEndDateField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 7;
         inputPanel.add(tempEndDateField, gbc);
-        JButton tempSelectEndDateButton = new JButton("Select Date");
+        JButton tempSelectEndDateButton = new JButton("Chọn ngày");
         gbc.gridx = 2; gbc.gridy = 7;
         inputPanel.add(tempSelectEndDateButton, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 8;
-        inputPanel.add(new JLabel("Production Year:"), gbc);
+        inputPanel.add(new JLabel("Năm sản xuất:"), gbc);
         JTextField tempProductionYearField = new JTextField(20);
         gbc.gridx = 1; gbc.gridy = 8; gbc.gridwidth = 2;
         inputPanel.add(tempProductionYearField, gbc);
 
         gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 9;
-        inputPanel.add(new JLabel("Country:"), gbc);
+        inputPanel.add(new JLabel("Quốc gia:"), gbc);
         JTextField tempCountryField = new JTextField(20);
         tempCountryField.setEditable(false);
         gbc.gridx = 1; gbc.gridy = 9;
         inputPanel.add(tempCountryField, gbc);
-        JButton tempSelectCountryButton = new JButton("Select Country");
+        JButton tempSelectCountryButton = new JButton("Chọn quốc gia");
         gbc.gridx = 2; gbc.gridy = 9;
         inputPanel.add(tempSelectCountryButton, gbc);
+
+        gbc.gridwidth = 1; gbc.gridx = 0; gbc.gridy = 10;
+        inputPanel.add(new JLabel("Giới hạn tuổi:"), gbc);
+        JTextField tempAgeRestrictionField = new JTextField(20);
+        gbc.gridx = 1; gbc.gridy = 10; gbc.gridwidth = 2;
+        inputPanel.add(tempAgeRestrictionField, gbc);
 
         JLabel tempPosterPreview = new JLabel();
         tempPosterPreview.setPreferredSize(new Dimension(150, 200));
         tempPosterPreview.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        gbc.gridx = 3; gbc.gridy = 0; gbc.gridheight = 10;
+        gbc.gridx = 3; gbc.gridy = 0; gbc.gridheight = 11;
         inputPanel.add(tempPosterPreview, gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -492,13 +506,13 @@ public class AdminFrame extends JFrame {
             try {
                 List<String> genres = movieBUS.getAllGenres();
                 String selectedGenre = (String) JOptionPane.showInputDialog(
-                        dialog, "Select Genre:", "Genre Selection",
+                        dialog, "Chọn thể loại:", "Lựa chọn thể loại",
                         JOptionPane.PLAIN_MESSAGE, null, genres.toArray(), genres.get(0));
                 if (selectedGenre != null) {
                     tempGenreField.setText(selectedGenre);
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(dialog, "Failed to load genres: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(dialog, "Không thể tải danh sách thể loại: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -506,18 +520,18 @@ public class AdminFrame extends JFrame {
             try {
                 List<String> countries = movieBUS.getAllCountries();
                 String selectedCountry = (String) JOptionPane.showInputDialog(
-                        dialog, "Select Country:", "Country Selection",
+                        dialog, "Chọn quốc gia:", "Lựa chọn quốc gia",
                         JOptionPane.PLAIN_MESSAGE, null, countries.toArray(), countries.get(0));
                 if (selectedCountry != null) {
                     tempCountryField.setText(selectedCountry);
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(dialog, "Failed to load countries: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(dialog, "Không thể tải danh sách quốc gia: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         tempSelectStartDateButton.addActionListener(e -> {
-            JDialog dateDialog = new JDialog(dialog, "Select Start Date", true);
+            JDialog dateDialog = new JDialog(dialog, "Chọn ngày bắt đầu", true);
             dateDialog.setSize(300, 150);
             dateDialog.setLocationRelativeTo(dialog);
             dateDialog.setLayout(new BorderLayout());
@@ -529,7 +543,7 @@ public class AdminFrame extends JFrame {
 
             JPanel dateButtonPanel = new JPanel(new FlowLayout());
             JButton okButton = new JButton("OK");
-            JButton cancelDateButton = new JButton("Cancel");
+            JButton cancelDateButton = new JButton("Hủy");
             dateButtonPanel.add(okButton);
             dateButtonPanel.add(cancelDateButton);
             dateDialog.add(dateButtonPanel, BorderLayout.SOUTH);
@@ -545,7 +559,7 @@ public class AdminFrame extends JFrame {
         });
 
         tempSelectEndDateButton.addActionListener(e -> {
-            JDialog dateDialog = new JDialog(dialog, "Select End Date", true);
+            JDialog dateDialog = new JDialog(dialog, "Chọn ngày kết thúc", true);
             dateDialog.setSize(300, 150);
             dateDialog.setLocationRelativeTo(dialog);
             dateDialog.setLayout(new BorderLayout());
@@ -557,7 +571,7 @@ public class AdminFrame extends JFrame {
 
             JPanel dateButtonPanel = new JPanel(new FlowLayout());
             JButton okButton = new JButton("OK");
-            JButton cancelDateButton = new JButton("Cancel");
+            JButton cancelDateButton = new JButton("Hủy");
             dateButtonPanel.add(okButton);
             dateButtonPanel.add(cancelDateButton);
             dateDialog.add(dateButtonPanel, BorderLayout.SOUTH);
@@ -591,21 +605,23 @@ public class AdminFrame extends JFrame {
                 movie.setProductionYear(prodYearStr.isEmpty() ? 0 : Integer.parseInt(prodYearStr));
                 String countryName = tempCountryField.getText().trim();
                 movie.setCountryID(countryName.isEmpty() ? 0 : movieDAO.getCountryIdByName(countryName));
+                String ageRestrictionStr = tempAgeRestrictionField.getText().trim();
+                movie.setAgeRestriction(ageRestrictionStr.isEmpty() ? 0 : Integer.parseInt(ageRestrictionStr));
 
                 if (movie.getTitle().isEmpty()) {
-                    throw new IllegalArgumentException("Title cannot be empty");
+                    throw new IllegalArgumentException("Tên phim không được để trống");
                 }
                 if (!movie.getPoster().isEmpty() && !movie.getPoster().matches(".*\\.(jpg|jpeg|png|gif)$")) {
-                    throw new IllegalArgumentException("Invalid poster format");
+                    throw new IllegalArgumentException("Định dạng áp phích không hợp lệ");
                 }
 
                 movieBUS.addMovie(movie);
-                JOptionPane.showMessageDialog(this, "Movie added successfully");
+                JOptionPane.showMessageDialog(this, "Thêm phim thành công");
                 clearForm();
                 loadMovies();
                 dialog.dispose();
             } catch (SQLException | IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, "Failed to add movie: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Không thể thêm phim: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
         cancelButton.addActionListener(e -> dialog.dispose());
@@ -633,34 +649,36 @@ public class AdminFrame extends JFrame {
             movie.setProductionYear(prodYearStr.isEmpty() ? 0 : Integer.parseInt(prodYearStr));
             String countryName = countryField.getText().trim();
             movie.setCountryID(countryName.isEmpty() ? 0 : movieDAO.getCountryIdByName(countryName));
+            String ageRestrictionStr = ageRestrictionField.getText().trim();
+            movie.setAgeRestriction(ageRestrictionStr.isEmpty() ? 0 : Integer.parseInt(ageRestrictionStr));
 
             if (movie.getTitle().isEmpty()) {
-                throw new IllegalArgumentException("Title cannot be empty");
+                throw new IllegalArgumentException("Tên phim không được để trống");
             }
             if (!movie.getPoster().isEmpty() && !movie.getPoster().matches(".*\\.(jpg|jpeg|png|gif)$")) {
-                throw new IllegalArgumentException("Invalid poster format");
+                throw new IllegalArgumentException("Định dạng áp phích không hợp lệ");
             }
 
             movieBUS.updateMovie(movie);
-            JOptionPane.showMessageDialog(this.getParent(), "Movie updated successfully");
+            JOptionPane.showMessageDialog(this.getParent(), "Cập nhật phim thành công");
             clearForm();
             loadMovies();
         } catch (SQLException | IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this.getParent(), "Failed to update movie: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this.getParent(), "Không thể cập nhật phim: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void deleteMovie() {
         try {
             int movieID = Integer.parseInt(formPanel.getName());
-            if (JOptionPane.showConfirmDialog(this.getParent(), "Are you sure to delete this movie?", "Confirm Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(this.getParent(), "Bạn có chắc chắn muốn xóa phim này?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 movieBUS.deleteMovie(movieID);
-                JOptionPane.showMessageDialog(this.getParent(), "Movie deleted successfully");
+                JOptionPane.showMessageDialog(this.getParent(), "Xóa phim thành công");
                 clearForm();
                 loadMovies();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this.getParent(), "Failed to delete movie: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this.getParent(), "Không thể xóa phim: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -671,18 +689,29 @@ public class AdminFrame extends JFrame {
             for (Movie movie : movies) {
                 JPanel moviePanel = new JPanel(new BorderLayout());
                 moviePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                moviePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
+                moviePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
 
                 JLabel posterLabel = new JLabel();
                 if (movie.getPoster() != null && !movie.getPoster().isEmpty()) {
-                    posterLabel.setIcon(new ImageIcon(new ImageIcon(movie.getPoster()).getImage().getScaledInstance(100, 140, Image.SCALE_SMOOTH)));
+                    posterLabel.setIcon(new ImageIcon(new ImageIcon(movie.getPoster()).getImage().getScaledInstance(200, 140, Image.SCALE_SMOOTH)));
                 }
                 posterLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 moviePanel.add(posterLabel, BorderLayout.WEST);
 
+                JPanel infoPanel = new JPanel(new BorderLayout());
                 JLabel titleLabel = new JLabel(movie.getTitle());
                 titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-                moviePanel.add(titleLabel, BorderLayout.CENTER);
+                infoPanel.add(titleLabel, BorderLayout.NORTH);
+
+                JTextArea descriptionArea = new JTextArea(movie.getDescription());
+                descriptionArea.setLineWrap(true);
+                descriptionArea.setWrapStyleWord(true);
+                descriptionArea.setEditable(false);
+                descriptionArea.setBackground(moviePanel.getBackground());
+                descriptionArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                infoPanel.add(descriptionArea, BorderLayout.CENTER);
+
+                moviePanel.add(infoPanel, BorderLayout.CENTER);
 
                 moviePanel.addMouseListener(new MouseAdapter() {
                     @Override
@@ -690,7 +719,7 @@ public class AdminFrame extends JFrame {
                         formPanel.setVisible(true);
                         formPanel.setName(String.valueOf(movie.getMovieID()));
                         titleField.setText(movie.getTitle());
-                        descriptionArea.setText(movie.getDescription());
+                        AdminFrame.this.descriptionArea.setText(movie.getDescription()); // Sử dụng this để truy cập descriptionArea của class
                         durationField.setText(String.valueOf(movie.getDuration()));
                         directorField.setText(movie.getDirector());
                         genreField.setText(movie.getGenreName());
@@ -701,10 +730,12 @@ public class AdminFrame extends JFrame {
                         endDateField.setText(movie.getEndDate() != null ? movie.getEndDate().toString() : "");
                         productionYearField.setText(String.valueOf(movie.getProductionYear()));
                         countryField.setText(movie.getCountryName());
+                        ageRestrictionField.setText(String.valueOf(movie.getAgeRestriction()));
                         titleField.setEditable(true);
-                        descriptionArea.setEditable(true);
+                        AdminFrame.this.descriptionArea.setEditable(true); // Bật chỉnh sửa cho descriptionArea
                         durationField.setEditable(true);
                         directorField.setEditable(true);
+                        ageRestrictionField.setEditable(true);
                         updateButton.setEnabled(true);
                         deleteButton.setEnabled(true);
                         for (Component c : formPanel.getComponents()) {
@@ -720,7 +751,7 @@ public class AdminFrame extends JFrame {
             movieListPanel.revalidate();
             movieListPanel.repaint();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to load movies: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Không thể tải danh sách phim: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -738,10 +769,12 @@ public class AdminFrame extends JFrame {
         endDateField.setText("");
         productionYearField.setText("");
         countryField.setText("");
+        ageRestrictionField.setText("");
         titleField.setEditable(false);
         descriptionArea.setEditable(false);
         durationField.setEditable(false);
         directorField.setEditable(false);
+        ageRestrictionField.setEditable(false);
         updateButton.setEnabled(false);
         deleteButton.setEnabled(false);
         for (Component c : formPanel.getComponents()) {
