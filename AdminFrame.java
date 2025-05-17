@@ -192,6 +192,8 @@ public class AdminFrame extends JFrame {
             }
         };
         movieTable = new JTable(tableModel);
+        // Enforce single selection to ensure only one movie can be selected
+        movieTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         movieTable.setRowHeight(100);
         movieTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         movieTable.setFont(new Font("Segoe UI", Font.PLAIN, 14));
