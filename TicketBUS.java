@@ -1,31 +1,43 @@
 package com.movie.bus;
 
-import com.movie.dao.TicketDAO;
 import com.movie.model.Ticket;
-import com.movie.util.SocketClient;
+import com.movie.model.Seat;
+import com.movie.model.BookingHistory;
+import com.movie.dao.TicketDAO;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList; // Added import for ArrayList
+
+// Giả định SocketClient tồn tại, nếu không cần tạo lớp này
+import com.movie.util.SocketClient; // Thêm import cho SocketClient
 
 public class TicketBUS {
-    private TicketDAO ticketDAO = new TicketDAO();
+    private final TicketDAO ticketDAO = new TicketDAO();
 
-    public void selectSeat(String seat) {
-        System.out.println("Selected seat: " + seat);
-        SocketClient.sendMessage("Seat selected: " + seat);
+    public String processPayment(int customerID, int showtimeID, List<Seat> selectedSeats, double totalAmount) {
+        try {
+            for (Seat seat : selectedSeats) {
+                Ticket ticket = new Ticket();
+                ticket.setCustomerID(customerID);
+                ticket.setShowtimeID(showtimeID);
+                ticket.setSeatID(seat.getSeatID());
+                ticket.setPrice(totalAmount / selectedSeats.size());
+                ticketDAO.bookTicket(ticket);
+                SocketClient.sendMessage("Ticket booked: Seat " + seat.getSeatNumber() + ", Amount: " + ticket.getPrice());
+            }
+            return "Thanh toán thành công: " + totalAmount + " VND";
+        } catch (SQLException e) {
+            e.printStackTrace(); // Nên thay bằng logging chuyên nghiệp
+            return "Thanh toán thất bại: " + e.getMessage();
+        }
     }
 
-    public String processPayment(String amount) {
+    public List<BookingHistory> getBookingHistory(int customerID) {
         try {
-            Ticket ticket = new Ticket();
-            ticket.setCustomerID(1);
-            ticket.setShowtimeID(1);
-            ticket.setSeat("A1");
-            ticket.setPrice(Double.parseDouble(amount));
-            ticketDAO.bookTicket(ticket);
-            SocketClient.sendMessage("Ticket booked: Seat A1, Amount: " + amount);
-            return "Thanh toán thành công: " + amount + " VND";
+            return ticketDAO.getBookingHistory(customerID); // Sử dụng phương thức đã đổi tên
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Thanh toán thất bại";
+            return new ArrayList<>(); // Trả về danh sách rỗng nếu có lỗi
         }
     }
 }
