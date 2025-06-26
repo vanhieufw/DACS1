@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<invoice>
+    <invoiceId>INV-20250528_211011</invoiceId>
+    <dateTime>2025-05-28T21:10:11.673672200</dateTime>
+    <scheduleId>9</scheduleId>
+    <roomId>1</roomId>
+    <seats>
+        <seat>B4</seat>
+        <seat>B4</seat>
+        <seat>B4</seat>
+        <seat>B3</seat>
+        <seat>B2</seat>
+        <seat>B2</seat>
+    </seats>
+    <totalCost>900000</totalCost>
+    <paymentMethod>Momo</paymentMethod>
+</invoice>
